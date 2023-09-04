@@ -163,7 +163,7 @@ void io_init(void)
 
 int main (void)
 {
-	float delay = 1000.0;
+	int delay = 1000;
 	board_init();
 	sysclk_init();
 	delay_init();
