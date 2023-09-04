@@ -4,6 +4,21 @@
 #include "gfx_mono_text.h"
 #include "sysfont.h"
 
+
+#define LED1_PIO      PIOC
+#define LED1_PIO_ID   ID_PIOC
+#define LED1_IDX      0
+#define LED1_IDX_MASK (1 << LED1_IDX)
+
+
+void pisca_led(int n, int t){
+	for (int i=0;i<n;i++){
+		pio_clear(LED1_PIO, LED1_IDX_MASK);
+		delay_ms(t);
+		pio_set(LED1_PIO, LED1_IDX_MASK);
+		delay_ms(t);
+	}
+}
 int main (void)
 {
 	board_init();
@@ -15,7 +30,7 @@ int main (void)
   
   
 	gfx_mono_draw_filled_circle(20, 16, 16, GFX_PIXEL_SET, GFX_WHOLE);
-  gfx_mono_draw_string("mundo", 50,16, &sysfont);
+	gfx_mono_draw_string("mundo", 50,16, &sysfont);
   
   
 
