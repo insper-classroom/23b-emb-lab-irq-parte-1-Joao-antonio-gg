@@ -95,7 +95,8 @@ void io_init(void)
 
   // Configura PIO para lidar com o pino do botão como entrada
   // com pull-up
-	pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
+	pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_set_debounce_filter(BUT_PIO, BUT_IDX_MASK, 60);
 
   // Configura interrupção no pino referente ao botao e associa
   // função de callback caso uma interrupção for gerada
@@ -103,7 +104,7 @@ void io_init(void)
   pio_handler_set(BUT_PIO,
                   BUT_PIO_ID,
                   BUT_IDX_MASK,
-                  PIO_IT_FALL_EDGE,
+                  PIO_IT_RISE_EDGE,
                   but_callback);
 
   // Ativa interrupção e limpa primeira IRQ gerada na ativacao
@@ -114,6 +115,14 @@ void io_init(void)
   // com prioridade 4 (quanto mais próximo de 0 maior)
   NVIC_EnableIRQ(BUT_PIO_ID);
   NVIC_SetPriority(BUT_PIO_ID, 4); // Prioridade 4
+}
+
+/* flag */
+volatile char but_flag; // (1)
+
+/* funcao de callback/ Handler */
+void but_callBack(void){
+	but_flag = 1;
 }
 
 /************************************************************************/
@@ -136,5 +145,17 @@ void main(void)
 	// aplicacoes embarcadas no devem sair do while(1).
 	while(1)
   {
+	  if (but_flag) {  // (2)
+		  /*pisca_led(5, 200);*/
+		  for (int i=0;i<5;i++){
+			  pio_clear(LED_PIO, LED_IDX_MASK);
+			  delay_ms(200);
+			  pio_set(LED_PIO, LED_IDX_MASK);
+			  delay_ms(200);
+			  
+		  }
+		  but_flag = 0; // (3)
+	  }
+	  pmc_sleep(SAM_PM_SMODE_SLEEP_WFI); // (1)
 	}
 }
