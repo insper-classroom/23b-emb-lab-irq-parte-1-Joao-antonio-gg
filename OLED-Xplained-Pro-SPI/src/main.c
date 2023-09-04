@@ -72,7 +72,7 @@ void but3_callback(void)
 void pisca_led(int n, float delay){
 	for (int i=0;i<n;i++){
 		pio_clear(LED_PIO, LED_PIO_IDX_MASK);
-		for(int i=1;i<=127;i++){
+		for(int Q=1;Q<=127;Q++){
 			gfx_mono_draw_rect(i, 5, 0, 10, GFX_PIXEL_SET);
 			delay_ms(delay/126.0);
 		}
