@@ -77,8 +77,8 @@ void pisca_led(int n, float delay){
 			delay_ms(delay/126.0);
 		}
 		pio_set(LED_PIO, LED_PIO_IDX_MASK);
-		for(int i=127;i>=1;i--){
-			gfx_mono_draw_rect(i, 5, 0, 10, GFX_PIXEL_CLR);
+		for(int k=127;k>=1;k--){
+			gfx_mono_draw_rect(k, 5, 0, 10, GFX_PIXEL_CLR);
 			delay_ms(delay/126.0);
 		}
 	}
