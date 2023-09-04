@@ -41,7 +41,7 @@ volatile char but1_flag;
 
 volatile char but2_flag;
 
-volatile char blink_flag;
+
 
 volatile char but3_flag;
 
@@ -182,12 +182,12 @@ int main (void)
 	gfx_mono_draw_string("Freq:", 10,16, &sysfont);
 	gfx_mono_draw_string("Hz", 110,16, &sysfont);
 	//pisca_led(5, delay);
-	blink_flag = 1;
+	
 	
 
 	/* Insert application code here, after the board has been initialized. */
 	while(1) {
-		
+		blink_flag = 1;
 		float freq = 1 / (delay/1000);
 		char str[128]; // (1)
 		sprintf(str, "%.2f", freq);
