@@ -205,7 +205,7 @@ int main (void)
 				but1_flag = 0;
 			}
 			
-		}
+		
 
 		if (but2_flag) {
 			blink_flag = 0;
