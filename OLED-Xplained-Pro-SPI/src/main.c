@@ -41,8 +41,6 @@ volatile char but1_flag;
 
 volatile char but2_flag;
 
-
-
 volatile char but3_flag;
 
 /************************************************************************/
