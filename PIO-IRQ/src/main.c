@@ -63,9 +63,12 @@ void pisca_led(int n, int t);
  * !! Isso é um exemplo ruim, nao deve ser feito na pratica, !!
  * !! pois nao se deve usar delays dentro de interrupcoes    !!
  */
-void but_callback(void)
-{
-  pisca_led(5, 200);
+/* flag */
+volatile char but_flag; // (1)
+
+/* funcao de callback/ Handler */
+void but_callBack(void){
+	but_flag = 1;
 }
 
 /************************************************************************/
@@ -105,7 +108,7 @@ void io_init(void)
                   BUT_PIO_ID,
                   BUT_IDX_MASK,
                   PIO_IT_RISE_EDGE,
-                  but_callback);
+                  but_callBack);
 
   // Ativa interrupção e limpa primeira IRQ gerada na ativacao
   pio_enable_interrupt(BUT_PIO, BUT_IDX_MASK);
@@ -117,13 +120,7 @@ void io_init(void)
   NVIC_SetPriority(BUT_PIO_ID, 4); // Prioridade 4
 }
 
-/* flag */
-volatile char but_flag; // (1)
 
-/* funcao de callback/ Handler */
-void but_callBack(void){
-	but_flag = 1;
-}
 
 /************************************************************************/
 /* Main                                                                 */
