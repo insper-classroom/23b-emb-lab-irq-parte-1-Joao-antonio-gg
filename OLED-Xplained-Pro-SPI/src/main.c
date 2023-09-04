@@ -194,16 +194,12 @@ int main (void)
 			blink_flag = 1;
 			delay_ms(1000);
 			if (!pio_get(BUT1_PIO, PIO_INPUT, BUT1_PIO_IDX_MASK)) {
-				if (delay >= 4900) {
-					delay = 5000;
-					} else {
+				
 					delay += 100;
 				}
-				but1_flag = 0;
-				}else{
-				if (delay <= 200) {
-					delay = 100;
-					} else {
+				
+				else{
+				
 					delay -= 100;
 				}
 				but1_flag = 0;
