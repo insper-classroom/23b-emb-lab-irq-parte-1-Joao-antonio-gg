@@ -65,7 +65,7 @@ void but3_callback(void)
 }
 
 
-float delay = 1000.0;
+
 
 /************************************************************************/
 /* fun��es                                                              */
@@ -163,6 +163,7 @@ void io_init(void)
 
 int main (void)
 {
+	float delay = 1000.0;
 	board_init();
 	sysclk_init();
 	delay_init();
