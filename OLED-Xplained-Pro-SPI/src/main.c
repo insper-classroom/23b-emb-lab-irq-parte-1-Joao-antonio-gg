@@ -154,7 +154,7 @@ int main (void)
 	gfx_mono_draw_string("Hz", 110,16, &sysfont);
 
 	while(1) {
-		blink_flag = 1;
+		int blink_flag = 1;
 		float freq = 1 / (delay/1000);
 		char str[128]; 
 		sprintf(str, "%.2f", freq);
