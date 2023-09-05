@@ -39,9 +39,6 @@ volatile char but2_flag;
 volatile char but3_flag;
 
 
-
-
-
 void but1_callback(void)
 {
 	but1_flag = 1;
@@ -56,7 +53,6 @@ void but3_callback(void)
 {
 	but3_flag = 1;
 }
-
 
 
 void pisca_led(int n, float delay){
